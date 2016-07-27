@@ -1,0 +1,19 @@
+{
+  "name": "thunderboard-track-data",
+  "version": "1.0.0",
+  "description": "Read track data over USB, send it to Firebase.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "serial:list": "node_modules/.bin/serialport-list",
+    "serial:term": "node_modules/.bin/serialport-term"
+  },
+  "author": "Brad Stewart <brad.stewart@silabs.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "firebase": "3.2.1",
+    "request": "2.74.0",
+    "serialport": "4.0.1"
+  }
+}
