@@ -3,7 +3,7 @@ const path = require('path')
 const SerialPort = require('serialport')
 
 const app = firebase.initializeApp({
-  // TODO: Setup service account for this app.
+  // Setup service account for this app.
   serviceAccount: path.join(__dirname, '..', 'auth', 'firebase.json'),
   databaseURL: 'https://thunderboard-raceops.firebaseio.com',
 })
@@ -15,6 +15,7 @@ const MAX_TIME = 9.9999
 // This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
 var result = {}
 var ref = null
+var timeout = null
 var trackDataDB = db.ref().child('track-data')
 
 /**
@@ -52,6 +53,7 @@ fillFailedRuns = function(obj) {
       obj[i] = MAX_TIME
     }
   }
+  push(obj)
 }
 
 /**
@@ -63,15 +65,24 @@ fillFailedRuns = function(obj) {
 pushResult = function(obj) {
   if (Object.keys(obj).length === 1) {
     // First car has finished the race!
-    // TODO: Wait for 10 seconds if some cars don't arrive.
+    // Wait for 10 seconds if some cars don't arrive.
     // Push a timestamp
     // New firebase reference
     ref = trackDataDB.push()
-
     let time = {
       timestamp: Date.now(),
     }
     ref.update(time)
+    timeout = setTimeout(fillFailedRuns, 10000)
+  }
+
+  push(obj)
+
+  if (Object.keys(obj).length === NUMBER_OF_LANES) {
+    // all the cars finished
+    clearTimeout(timeout)
+    ref = null
+    result = {}
   }
 }
 
