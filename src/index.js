@@ -9,6 +9,10 @@ const app = firebase.initializeApp({
 })
 
 const db = app.database()
+const NUMBER_OF_LANES = 4
+
+// This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
+var result = {}
 
 /**
  * Parses the raw data and puts it in the object
@@ -47,6 +51,6 @@ SerialPort.list((err, ports) => {
   myPort.on('data', (data) => {
     let str = data.toString()
     console.log(str)
-    parseStrData(str)
+    parseStrData(str, result)
   })
 })
