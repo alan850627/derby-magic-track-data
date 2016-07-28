@@ -11,8 +11,8 @@ const app = firebase.initializeApp({
 const db = app.database()
 const NUMBER_OF_LANES = 4
 
-// This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
-var result = {}
+
+var result = {} // This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
 var ref = null
 var trackDataDB = db.ref().child('track-data')
 
@@ -69,6 +69,7 @@ pushResult = function(obj) {
 
   if (Object.keys(obj).length === NUMBER_OF_LANES) {
     // all the cars finished
+    // Reset state
     ref = null
     result = {}
   }
