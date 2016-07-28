@@ -39,7 +39,7 @@ parseStrData = function(str, obj = {}) {
  * @param  obj [the result object to push to firebase]
  */
 push = function(obj) {
-  // TODO: Pushes the data to firebase
+  ref.child('data').update(obj)
 }
 
 /**
