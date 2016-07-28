@@ -4,12 +4,13 @@ const SerialPort = require('serialport')
 
 const app = firebase.initializeApp({
   // TODO: Setup service account for this app.
-  // serviceAccount: path.join(__dirname, '..', 'auth', 'firebase.json'),
+  serviceAccount: path.join(__dirname, '..', 'auth', 'firebase.json'),
   databaseURL: 'https://thunderboard-raceops.firebaseio.com',
 })
 
 const db = app.database()
 const NUMBER_OF_LANES = 4
+const MAX_TIME = 9.9999
 
 // This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
 var result = {}
@@ -28,6 +29,36 @@ parseStrData = function(str, obj = {}) {
   let split = str.split('=')
   obj[split[0]] = parseFloat(split[1].substring(0, 6))
   return obj
+}
+
+/**
+ * Push the data to firebase
+ * @param  obj [the result object to push to firebase]
+ */
+push = function(obj) {
+  // TODO: Pushes the data to firebase
+}
+
+/**
+ * Some runs won't finish, so filling those with MAX_TIME
+ * @param  obj [the result object to fill]
+ * @return {[type]}     [description]
+ */
+fillFailedRuns = function(obj) {
+
+}
+
+/**
+ * Checks whether the result is ready to be sent to firebase or not
+ * If it is ready, push to firebase.
+ * @param  obj [object to be checked and to be pushed to firebase]
+ * @return {[type]}     [description]
+ */
+checkResult = function(obj) {
+  if (Object.keys(obj).length === 1) {
+    // First car has finished the race!
+    // TODO: Wait for 10 seconds if some cars don't arrive.
+  }
 }
 
 /**
@@ -52,5 +83,6 @@ SerialPort.list((err, ports) => {
     let str = data.toString()
     console.log(str)
     parseStrData(str, result)
+    checkResult(result)
   })
 })
