@@ -8,6 +8,13 @@ const app = firebase.initializeApp({
   databaseURL: 'https://thunderboard-raceops.firebaseio.com',
 })
 
+var parseStrData = function(str) {
+  if (!str.includes('=')) {
+    return
+  }
+  console.log(str)
+}
+
 const db = app.database()
 
 // list and store serial ports
@@ -28,7 +35,16 @@ const db = app.database()
 //   })
 //
 //   myPort.on('data', (data) => {
-//     console.log(data)
+//     let str = data.toString()
+//     console.log(str)
+//     parseStrData(str)
 //   })
 // })
 //
+
+var data1 = new Buffer([0x32, 0x3d, 0x35, 0x2e, 0x30, 0x39, 0x32, 0x30, 0x21, 0x20])
+var data2 = new Buffer([0x31, 0x3d, 0x35, 0x2e, 0x33, 0x36, 0x37, 0x36, 0x22, 0x20])
+var data3 = new Buffer([0x33, 0x3d, 0x35, 0x2e, 0x37, 0x31, 0x38, 0x38, 0x23, 0x20])
+var data4 = new Buffer([0x34, 0x3d, 0x35, 0x2e, 0x39, 0x36, 0x33, 0x33, 0x24, 0x20, 0x0d, 0x0a])
+
+parseStrData(data1.toString())
