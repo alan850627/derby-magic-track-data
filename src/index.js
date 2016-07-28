@@ -14,6 +14,8 @@ const MAX_TIME = 9.9999
 
 // This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
 var result = {}
+var ref = null
+var trackDataDB = db.ref().child('track-data')
 
 /**
  * Parses the raw data and puts it in the object
@@ -63,6 +65,13 @@ pushResult = function(obj) {
     // First car has finished the race!
     // TODO: Wait for 10 seconds if some cars don't arrive.
     // Push a timestamp
+    // New firebase reference
+    ref = trackDataDB.push()
+
+    let time = {
+      timestamp: Date.now(),
+    }
+    ref.update(time)
   }
 }
 
