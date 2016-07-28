@@ -45,7 +45,11 @@ push = function(obj) {
  * @return {[type]}     [description]
  */
 fillFailedRuns = function(obj) {
-
+  for (let i = 1; i <= NUMBER_OF_LANES; i++) {
+    if (!obj[i]) {
+      obj[i] = MAX_TIME
+    }
+  }
 }
 
 /**
