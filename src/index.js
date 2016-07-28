@@ -53,15 +53,16 @@ fillFailedRuns = function(obj) {
 }
 
 /**
- * Checks whether the result is ready to be sent to firebase or not
+ * Pushes the results to firebase.
  * If it is ready, push to firebase.
  * @param  obj [object to be checked and to be pushed to firebase]
  * @return {[type]}     [description]
  */
-checkResult = function(obj) {
+pushResult = function(obj) {
   if (Object.keys(obj).length === 1) {
     // First car has finished the race!
     // TODO: Wait for 10 seconds if some cars don't arrive.
+    // Push a timestamp
   }
 }
 
@@ -87,6 +88,6 @@ SerialPort.list((err, ports) => {
     let str = data.toString()
     console.log(str)
     parseStrData(str, result)
-    checkResult(result)
+    pushResult(result)
   })
 })
