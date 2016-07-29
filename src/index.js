@@ -31,7 +31,7 @@ parseStrData = function(str, obj = {}) {
   str.split(' ').forEach((data) => { // If multiple datapoints come in at once, it's separated by space.
     if (data.includes('=')) {
       let split = data.split('=')
-      obj[split[0]] = parseFloat(split[1].substring(0, 6))
+      obj['Lane' + split[0]] = parseFloat(split[1].substring(0, 6))
     }
   })
 
@@ -100,3 +100,12 @@ SerialPort.list((err, ports) => {
     pushResult(result)
   })
 })
+
+let obj = {
+  'Lane1': Math.random(),
+  'Lane2': Math.random(),
+  'Lane3': Math.random(),
+  'Lane4': Math.random(),
+}
+
+pushResult(obj)
