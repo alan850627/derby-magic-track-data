@@ -14,7 +14,7 @@ const NUMBER_OF_LANES = 4
 
 var result = {} // This object is what is eventually sent to firebase. SerialPort will populate this object as it gets data.
 var ref = null
-var trackDataDB = db.ref().child('track-data')
+var trackDataDB = db.ref().child('trackData')
 
 /**
  * Parses the raw data and puts it in the object
