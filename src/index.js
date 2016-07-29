@@ -100,12 +100,3 @@ SerialPort.list((err, ports) => {
     pushResult(result)
   })
 })
-
-let obj = {
-  'Lane1': Math.random(),
-  'Lane2': Math.random(),
-  'Lane3': Math.random(),
-  'Lane4': Math.random(),
-}
-
-pushResult(obj)
